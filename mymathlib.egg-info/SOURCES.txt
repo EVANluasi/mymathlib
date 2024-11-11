@@ -1,0 +1,17 @@
+setup.py
+mymathlib/__init__.py
+mymathlib/algebra.py
+mymathlib/calculus.py
+mymathlib/complex.py
+mymathlib/linear_algebra.py
+mymathlib/matrix.py
+mymathlib/numerical_methods.py
+mymathlib/optimization.py
+mymathlib/statistics.py
+mymathlib/trigonometry.py
+mymathlib/utils.py
+mymathlib.egg-info/PKG-INFO
+mymathlib.egg-info/SOURCES.txt
+mymathlib.egg-info/dependency_links.txt
+mymathlib.egg-info/requires.txt
+mymathlib.egg-info/top_level.txt

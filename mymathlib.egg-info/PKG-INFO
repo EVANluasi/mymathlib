@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: mymathlib
+Version: 0.1
+Summary: Library Matematika Lanjut dengan Fitur Aljabar, Kalkulus, Statistik, dan Optimasi
+Home-page: https://github.com/EVANluasi/mymathlib.git
+Author: Kei
+Author-email: fvan9318@gmail.com
+Requires-Dist: numpy
+Requires-Dist: scipy
