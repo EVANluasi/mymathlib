@@ -1,4 +1,4 @@
-# algebra.py
+import numpy as np
 
 def add(a, b):
     """
@@ -66,7 +66,28 @@ def solve_linear(a, b):
     
     Returns:
     float: Nilai x yang menyelesaikan persamaan
+    Raises:
+    ValueError: Jika a == 0
     """
     if a == 0:
         raise ValueError("a tidak boleh nol untuk persamaan linear.")
     return -b / a
+
+def solve_linear_system(A, B):
+    """
+    Fungsi untuk menyelesaikan sistem persamaan linear AX = B.
+    
+    Args:
+    A (numpy.ndarray): Matriks koefisien
+    B (numpy.ndarray): Vektor hasil
+    
+    Returns:
+    numpy.ndarray: Vektor solusi X
+    Raises:
+    ValueError: Jika sistem tidak memiliki solusi unik atau jika matriks A tidak dapat diinversi
+    """
+    try:
+        # Menggunakan np.linalg.solve untuk menyelesaikan sistem persamaan linear
+        return np.linalg.solve(A, B)
+    except np.linalg.LinAlgError:
+        raise ValueError("Sistem persamaan tidak memiliki solusi unik atau matriks A tidak dapat diinversi.")
