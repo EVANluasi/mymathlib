@@ -54,11 +54,12 @@ print(f"cot({angle_rad}) = {mymathlib.cot(angle_rad)}")
 print("\n----- Uji Coba: Optimasi -----")
 # Fungsi kuadrat sederhana f(x) = (x - 3)^2 yang minimum di x = 3
 def f(x):
-    return (x - 3)**2
+    return (x[0] - 3)**2  # Fungsi ini membutuhkan input array untuk gradient descent
 
-start_point = 10  # Titik awal optimasi
+start_point = np.array([10.0])  # Titik awal optimasi dalam bentuk array
 learning_rate = 0.1
+tolerance = 1e-5
 num_iterations = 100
 
-optimal_x = mymathlib.gradient_descent(f, start_point, learning_rate, num_iterations)
-print(f"Nilai x yang meminimalkan fungsi f(x) = (x - 3)^2 adalah x = {optimal_x}")
+optimal_x = mymathlib.gradient_descent(func=f, start=start_point, lr=learning_rate, tol=tolerance, max_iter=num_iterations)
+print(f"Nilai x yang meminimalkan fungsi f(x) = (x - 3)^2 adalah x = {optimal_x[0]}")

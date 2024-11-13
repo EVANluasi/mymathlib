@@ -1,13 +1,34 @@
-# optimization.py
 import numpy as np
 
-def gradient_descent(func, grad, start, lr=0.01, tol=1e-5, max_iter=1000):
+def numerical_gradient(func, x, epsilon=1e-8):
+    """
+    Menghitung gradien dari fungsi 'func' pada titik 'x' menggunakan metode perbedaan hingga.
+    
+    Args:
+    func (function): Fungsi yang akan dihitung gradiennya
+    x (np.ndarray): Titik di mana gradien dihitung
+    epsilon (float): Nilai kecil untuk perbedaan hingga, default 1e-8
+    
+    Returns:
+    np.ndarray: Gradien dari fungsi pada titik x
+    """
+    grad = np.zeros_like(x, dtype=float)
+    for i in range(len(x)):
+        x_eps = np.copy(x)
+        x_eps[i] += epsilon
+        f_x_eps = func(x_eps)
+        f_x = func(x)
+        grad[i] = (f_x_eps - f_x) / epsilon
+    return grad
+
+def gradient_descent(func, grad=None, start=[0, 0], lr=0.01, tol=1e-5, max_iter=1000):
     """
     Menyelesaikan masalah optimasi dengan metode gradient descent.
     
     Args:
     func (function): Fungsi yang akan diminimalkan
-    grad (function): Fungsi gradien dari fungsi yang akan diminimalkan
+    grad (function or None): Fungsi gradien dari fungsi yang akan diminimalkan (opsional).
+                             Jika None, gradien akan dihitung secara numerik.
     start (np.ndarray): Titik awal untuk pencarian solusi
     lr (float): Laju pembelajaran, default 0.01
     tol (float): Toleransi perubahan, default 1e-5
@@ -16,18 +37,32 @@ def gradient_descent(func, grad, start, lr=0.01, tol=1e-5, max_iter=1000):
     Returns:
     np.ndarray: Solusi yang ditemukan
     """
-    x = np.array(start)
+    x = np.array(start, dtype=float)
+    
     for _ in range(max_iter):
-        grad_val = grad(x)
+        # Hitung gradien secara numerik jika gradien eksplisit tidak disediakan
+        grad_val = grad(x) if grad is not None else numerical_gradient(func, x)
+        
+        # Update posisi
         x_new = x - lr * grad_val
+        
+        # Jika perubahan kurang dari toleransi, konvergensi tercapai
         if np.linalg.norm(x_new - x) < tol:
             return x_new
         x = x_new
     return x
 
-# Contoh fungsi dan gradiennya
+# Contoh fungsi yang akan diminimalkan (tanpa gradien eksplisit)
 def func(x):
     return x[0]**2 + x[1]**2  # f(x, y) = x^2 + y^2
 
-def grad(x):
-    return np.array([2*x[0], 2*x[1]])  # grad f(x, y) = [2x, 2y]
+# Panggilan untuk gradient_descent
+start_point = [2, 2]      # Titik awal
+learning_rate = 0.1       # Laju pembelajaran
+num_iterations = 1000     # Batas iterasi
+
+# Panggilan gradient_descent tanpa gradien eksplisit
+optimal_x = gradient_descent(func, start=start_point, lr=learning_rate, max_iter=num_iterations)
+
+print("Titik optimal:", optimal_x)
+print("Nilai fungsi di titik optimal:", func(optimal_x))

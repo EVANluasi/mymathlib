@@ -52,6 +52,17 @@ def gradient_descent(func, grad=None, start=[0, 0], lr=0.01, tol=1e-5, max_iter=
         x = x_new
     return x
 
-# Contoh fungsi tanpa gradien eksplisit
+# Contoh fungsi yang akan diminimalkan (tanpa gradien eksplisit)
 def func(x):
     return x[0]**2 + x[1]**2  # f(x, y) = x^2 + y^2
+
+# Panggilan untuk gradient_descent
+start_point = [2, 2]      # Titik awal
+learning_rate = 0.1       # Laju pembelajaran
+num_iterations = 1000     # Batas iterasi
+
+# Panggilan gradient_descent tanpa gradien eksplisit
+optimal_x = gradient_descent(func, start=start_point, lr=learning_rate, max_iter=num_iterations)
+
+print("Titik optimal:", optimal_x)
+print("Nilai fungsi di titik optimal:", func(optimal_x))

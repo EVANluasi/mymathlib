@@ -4,7 +4,6 @@ from .calculus import derivative, integral, limit
 from .statistics import mean, variance, std_deviation, correlation, linear_regression
 from .complex import add_complex, multiply_complex, conjugate, modulus
 from .linear_algebra import matrix_multiply, determinant, inverse, eigen
-from .optimization import gradient_descent
+from .optimization import numerical_gradient, gradient_descent
 from .numerical_methods import newton_raphson
 from .trigonometry import sin, cos, tan, sec, csc, cot
-from .cardinal import finite_cardinality, aleph_0, large_cardinal_example, cardinal_hierarchy, is_stronger_cardinal, simulate_embedding, compactness_property
